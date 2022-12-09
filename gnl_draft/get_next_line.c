@@ -6,7 +6,7 @@
 /*   By: ngnguyen <ngnguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:51:20 by ngnguyen          #+#    #+#             */
-/*   Updated: 2022/12/03 18:00:59 by ngnguyen         ###   ########.fr       */
+/*   Updated: 2022/12/09 13:33:53 by ngnguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	*get_next_line(int fd)
 	char		*buff;
 	static char	*string;
 	char		*line;
-	int			ret;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -50,28 +49,66 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!string)
 		string = ft_strdup("");
-	//ret = read (fd, buff, BUFFER_SIZE); //read BUFFER_SIZE from fd, save to buffer
-	//buff[ret] = '\0';
-	//if (ret == -1)
+	line = read_line(fd, &buff, &string);
+	return (line);
 }
 
-int	read_line(int fd, char **buff, char **string, char **line)
+char	*read_line(int fd, char **buff, char **string)
 {
 	int		ret;
 	char	*temp;
+	char	*line;
 
 	ret = 1;
-	while (ft_strchr(*string, '\n') == 0 && ret > 0)
+	while (ft_strchr(*string, '\n') == 0)
 	{
+		if (ret > 0)
+		{
 		ret = read (fd, buff, BUFFER_SIZE);
 		buff[ret] = '\0';
 		temp = *string;
 		*string = ft_strjoin(*string, *buff);
 		free(temp);
+		}
+		else
+			line = handle_error_eof(ret, line, string);
 	}
 	free(*buff);
-	if (ft_strchr(*string, '\n') != 0)
-	{
+	if (ft_strchr(*string, '\n'))
+		line = get_line(line, string);
+	return (line);
+}
 
+static char	*handle_error_eof(int ret, char **string, char **line)
+{
+	if (ret < 0)
+		return (NULL);
+	else if (ret == 0)
+	{
+		if (*string == (NULL))
+			*line = ft_strdup("");
+		else
+			*line =  *string;
 	}
+	return (*line);
+}
+
+static char	*get_line(char **line, char **string)
+{
+	char	*temp;
+	int		position_nl;
+
+	position_nl = 0;
+	temp = *string;
+	while ((*string)[position_nl] != '\n')
+		position_nl++;
+	*line = ft_substr(*string, 0, position_nl + 1);
+	*string = ft_strdup(*string + (position_nl + 1));
+	if (*string == NULL)
+	{
+		free(temp);
+		free(*string);
+	}
+	free(temp);
+	return (*line);
 }
