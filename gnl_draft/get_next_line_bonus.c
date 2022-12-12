@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngnguyen <ngnguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 17:53:23 by ngnguyen          #+#    #+#             */
-/*   Updated: 2022/12/12 17:54:46 by ngnguyen         ###   ########.fr       */
+/*   Created: 2022/12/12 17:54:36 by ngnguyen          #+#    #+#             */
+/*   Updated: 2022/12/12 17:55:40 by ngnguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*get_line(int fd, char *buff, char *backup)
 {

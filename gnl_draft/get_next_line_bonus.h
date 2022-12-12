@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngnguyen <ngnguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/03 14:47:35 by ngnguyen          #+#    #+#             */
-/*   Updated: 2022/12/12 17:53:36 by ngnguyen         ###   ########.fr       */
+/*   Created: 2022/12/12 17:56:03 by ngnguyen          #+#    #+#             */
+/*   Updated: 2022/12/12 17:56:37 by ngnguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 5
+#endif
+
+#ifndef FD_MAX
+# define FD_MAX 4096
 #endif
 
 #include <stdlib.h>
